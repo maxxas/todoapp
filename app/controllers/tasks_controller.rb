@@ -4,8 +4,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @done = Task.where(done: true)
-    @todo = Task.where(done: false)
+    if params[:sorting]
+      @done = Task.where(done: true).order(params[:sorting] => :desc)
+      @todo = Task.where(done: false).order(params[:sorting] => :desc)
+    else
+      @done = Task.where(done: true).order(created_at: :desc)
+      @todo = Task.where(done: false).order(updated_at: :desc)
+    end
+#    @done = Task.where(done: true).order(created_at: :desc)
+#    @todo = Task.where(done: false).order(updated_at: :desc) 
   end
 
   # GET /tasks/new
