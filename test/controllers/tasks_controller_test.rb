@@ -6,6 +6,7 @@ class TasksControllerTest < ActionController::TestCase
 
   setup do
     @task = tasks(:one)
+    @user = users(:one)
   end
 
   test "should get index" do
@@ -16,11 +17,13 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
+    sign_in @user
     get :new
     assert_response :success
   end
 
   test "should create task" do
+    sign_in @user
     assert_difference('Task.count') do
       post :create, task: { deadline: @task.deadline, done: @task.done, duration: @task.duration, name: @task.name }
     end
@@ -29,16 +32,19 @@ class TasksControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    sign_in @user
     get :edit, id: @task
     assert_response :success
   end
 
   test "should update task" do
+    sign_in @user
     patch :update, id: @task, task: { deadline: @task.deadline, done: @task.done, duration: @task.duration, name: @task.name }
     assert_redirected_to tasks_url
   end
 
   test "should destroy task" do
+    sign_in @user
     assert_difference('Task.count', -1) do
       delete :destroy, id: @task
     end
