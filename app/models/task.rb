@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
 
 belongs_to :user
+belongs_to :delegated, class_name: "User", foreign_key: "delegated_id"
 validates :name, presence: true
 validates :deadline, presence: true
 validates :duration, presence: true, numericality: true

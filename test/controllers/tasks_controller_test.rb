@@ -27,7 +27,6 @@ class TasksControllerTest < ActionController::TestCase
     assert_difference('Task.count') do
       post :create, task: { deadline: @task.deadline, done: @task.done, duration: @task.duration, name: @task.name }
     end
-
     assert_redirected_to tasks_url
   end
 
@@ -48,7 +47,18 @@ class TasksControllerTest < ActionController::TestCase
     assert_difference('Task.count', -1) do
       delete :destroy, id: @task
     end
-
     assert_redirected_to tasks_path
   end
+
+ ## test "should not get edit if not logged in" do
+    get :edit, id: @task
+    assert_response :redirect
+ ## end
+
+ ## test "should not get access if not user1" do
+    sign_in @user
+    get :edit, id: @task
+    assert_response :redirect
+ ## end
+
 end

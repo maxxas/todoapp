@@ -52,11 +52,6 @@ class TaskTest < ActiveSupport::TestCase
 	  task = Task.new
 	  task.deadline = Date.today + 1
 	  assert_equal 1, task.distance_from_now_in_days
-	end 
-
-	test "should not get edit if not logged in" do
-  	get :edit, id: @task
-  	assert_response :redirect
 	end
 
 end
