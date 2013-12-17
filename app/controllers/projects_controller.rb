@@ -11,12 +11,14 @@ class ProjectsController < ApplicationController
 
 	def create
   	@project = Project.new(project_params)
-  	@project.save
+  	if !@project.save
+    	render action: 'error'
+  	end
 	end
 
 private
     def project_params
       params.require(:project).permit(:name)
     end 
-    
+
 end
