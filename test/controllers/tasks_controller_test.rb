@@ -50,15 +50,15 @@ class TasksControllerTest < ActionController::TestCase
     assert_redirected_to tasks_path
   end
 
- ## test "should not get edit if not logged in" do
+  test "should not get edit if not logged in" do
     get :edit, id: @task
     assert_response :redirect
- ## end
+  end
 
  ## test "should not get access if not user1" do
-    sign_in @user
-    get :edit, id: @task
-    assert_response :redirect
+  ##  sign_in @user
+  ##  get :edit, id: @task
+  ##  assert_response :redirect
  ## end
 
 end
