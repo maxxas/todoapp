@@ -35,4 +35,13 @@ require 'test_helper'
   			end
   		assert_response :success
 		end
+
+		test "should destroy project" do
+  		sign_in @user
+  			assert_difference('Project.count', -1) do
+    			xhr :delete, :destroy, id: @project
+  			end
+  		assert_response :success
+		end
+
 end
